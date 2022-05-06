@@ -1,0 +1,155 @@
+{% load mytags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JobMap</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css"  href="{% static '/css/style.css' %} ">
+	<link rel="icon" href="{% static 'Images/suitcase.png'%} ">
+</head>
+<body onload="hideApti()">
+	{% with number_ques=0 %}
+	{% endwith %}
+	<div id="home" class="space"></div>
+	<nav>
+		<a href="index.html">
+		<span class="logo"><img src="{% static 'Images/suitcase.png'%} ">JobMap</span></a>
+
+		<ul>
+			<b>Aptitude Test</b>
+			<li class="vl"></li>
+
+			{% if user.is_authenticated %}
+			<li id="user-detail"><img class="user-icon" src="{% static 'Images/user.png'%} "><b>{{user.username}}</b></li>
+			
+
+			{% else %}
+			<li id="user-detail"><img class="user-icon" src="{% static 'Images/user.png'%} "><b>Username</b></li>
+			{% endif %}
+			<li class="vl"></li>
+			<li><a href="dashboard.html">Back <img class="login-icon" src="{% static 'Images/login.png'%} "></a></li>
+		</ul>
+	</nav>
+
+	<div class="space"></div>
+		<div class="part" id="apti-test-details">
+		<div class="write-up" >
+			<br>
+			<h3>Test Details:</h3>
+			<br><br>
+			<p>Aptitude tests are the most commonly used assesment techniques by job recruiters to test the basic intelligence of a student. Take this assesment to get an idea of how aptitude tests work and get a proper score card after the complete job analysis.</p>
+			<br>
+			<h4>Aptitude test contains a total of 3 sections, each containing 3 questions. The details regarding the sections are as follows:</h4>
+			<br>
+			<h4> • Section 1 - Quantative Test<br>
+			• Section 2 - Verbal Ability Test<br>
+			• Section 3 - Logical Reasoning Test<br><br>
+			</h4>
+			<h5>Note: Press the finish button at the end of all the sections after completing the test to submit your results.</h5>
+
+			<div class="blue button" onclick="aptiTestDetails()">Start Test</div>
+
+		</div>
+
+		<div class="cover-image">
+			<img style="width: 65%" src="{% static 'Images/aptitude.jpg' %}">
+	</div>
+	</div>
+
+	<form method="post" action="apti_result.html" >
+	<div class="part" id="apti-test-1">
+		<br>
+		<h4>Section 1 - Quantative Reasoning Test</h4>
+		<br>
+
+		
+		{% csrf_token %}
+
+		{% for q in questionList %}
+		{% if "Quantative" in q.tag %}
+
+		<br><h3>Q. {{q.question}}<br><br>
+			<input type="radio" name="id{{q.id}}" value=1> (a)  {{q.option1}}&emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=2> (b) {{q.option2}}&emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=3> (c) {{q.option3}}&emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=4> (d) {{q.option4}}<br><br>
+	</h3><br>
+		{% endif %}
+		{% endfor %}
+		<div class="right">
+		<div class="blue button qb" onclick="aptiTest1()">Next Section</div></div>
+	</div>
+
+	<div class="part" id="apti-test-2">
+		<br>
+		<h4>Section 2 - Verbal Reasoning Test</h4>
+		<br>
+		{% for q in questionList %}
+		{% if "Verbal" in q.tag %}
+		<br><h3>Q. {{q.question}}<br><br>
+			<input type="radio" name="id{{q.id}}" value=1> (a) {{q.option1}} &emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=2> (b) {{q.option2}} &emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=3> (c) {{q.option3}} &emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=4> (d) {{q.option4}}<br><br>
+		</h3><br>
+		{% endif %}
+		{% endfor %}
+		<div class="right">
+		<div class="blue button qb" onclick="aptiTest2()">Next Section</div></div>
+
+	</div>
+
+	
+
+	<div class="part" id="apti-test-3">
+		<br>
+		<h4>Section 3 - Logical Reasoning Test</h4>
+		<br>
+		{% for q in questionList %}
+		{% if "Logical" in q.tag %}
+		<br><h3>Q. {{q.question}}<br><br>
+			<input type="radio" name="id{{q.id}}" value=1> (a) {{q.option1}} &emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=2> (b) {{q.option2}} &emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=3> (c) {{q.option3}} &emsp;&emsp;
+			<input type="radio" name="id{{q.id}}" value=4> (d) {{q.option4}}<br><br>
+		</h3><br>
+		{% endif %}
+		{% endfor %}
+		<div class="right">
+		<button type="submit" class="blue button qb">Finish Test</button></div>
+	</div>
+	<div class="space"></div>
+		
+</form>
+
+</body>
+
+<script type="text/javascript">
+
+	function hideApti(){
+		document.getElementById("apti-test-1").style.display = "none";
+		document.getElementById("apti-test-2").style.display = "none";
+		document.getElementById("apti-test-3").style.display = "none";
+	}
+	
+	function aptiTestDetails() {
+  	document.getElementById("apti-test-details").style.display = "none";
+  	document.getElementById("apti-test-1").style.display = "block";
+}
+
+	function aptiTest1() {
+	document.getElementById("apti-test-1").style.display = "none";
+  	document.getElementById("apti-test-2").style.display = "block";
+}
+
+	function aptiTest2() {
+  	document.getElementById("apti-test-2").style.display = "none";
+  	document.getElementById("apti-test-3").style.display = "block";
+}
+
+</script>
+</html>

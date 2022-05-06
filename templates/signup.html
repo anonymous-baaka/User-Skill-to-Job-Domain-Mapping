@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JobMap</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+			rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+		<link rel="icon" href="{% static 'Images/suitcase.png' %}">
+	</head>
+	<body>
+		<div id="home" class="space"></div>
+		<nav>
+			<a href="index.html">
+				<span class="logo"><img src="{% static 'Images/suitcase.png' %}">JobMap</span></a>
+			<ul>
+				<b>You are on the Signup Page</b>
+				<li class="vl"></li>
+				<li><a href="index.html">Go to Home</a></li>
+			</ul>
+		</nav>
+
+		<div class="space"></div>
+
+		<!--put an alert message {% for message in messages %}
+	<h3>{{message}}</h3>
+	{% endfor %}-->
+		<!--put an alert message-->
+
+		<div class="part">
+			<div class="cover-image">
+				<img src="{% static 'Images/signup.jpg' %}">
+			</div>
+
+			<div class="write-up">
+				<h1>Create an Account</h1>
+
+				<form method="POST" action="signup.html">
+					{% csrf_token %}
+					<h4>Username</h4><br>
+					<input class="textbox" type="text" name="name_fullname" id="id_name"><br><br>
+					<h4>Email</h4><br>
+					<input onkeydown='ValidateEmail()' class="textbox" type="text"
+						name="name_email" id="id_email"><br>
+					<h4 id='emailMessage'></h4>
+					<br><br>
+
+					<h4>New Password</h4><br>
+					<input onkeydown='validatePassword()' class="textbox" type="password"
+						name="name_pwd" id="id_password"><br>
+					<h4 id='passwordMessage'></h4>
+					<br><br>
+
+
+					<h4>Re-enter Password</h4><br>
+					<input onkeydown= 'repasswordValidate()' class="textbox" type="password"
+						name="name_pwdre" id="id_passwordRe"><br>
+					<h4 id='repasswordMessage'></h4>
+					<br><br>
+
+					<input id="id_checkbox" class="checkbox" type="checkbox" name="name_terms"><h4
+						style="font-weight: 400;">I agree to all terms and conditions</h4>
+					<h4 id='checkboxMessage'></h4>
+					<br>
+					<p>Already have an account? <a href="login.html">Login here<a>.</p>
+
+
+							<button type="submit" class="red button">Create Account</button>
+						</form>
+					</div>
+
+				</div>
+				<div class="space"></div>
+
+				{% for message in messages %}
+				<script>
+	setTimeout(function() {
+			alert("{{message}}");
+
+		}, 0);
+</script>
+				{% endfor %}
+			</body>
+
+			<script>
+function ValidateEmail()
+{
+var inputText=document.getElementById("id_email").value;
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+if(inputText.match(mailformat))
+  {
+	document.getElementById('emailMessage').style.color = "green";
+	document.getElementById('emailMessage').innerHTML = "Valid Email";
+    return (true)
+  }
+else
+	{
+	document.getElementById('emailMessage').style.color = "red";
+	document.getElementById('emailMessage').innerHTML = "invalid Email";
+    return (false)
+	}
+}
+</script>
+
+			<script>
+	function validatePassword()
+	{
+		var minNumberofChars = 6;
+    	var maxNumberofChars = 16;
+		var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+		var newPassword  = document.getElementById("id_password").value;
+
+		if(newPassword.length < minNumberofChars || newPassword.length > maxNumberofChars)
+		{
+			document.getElementById('passwordMessage').style.color = "red";
+			document.getElementById('passwordMessage').innerHTML = "Password must be between 6 and 16 characters";
+    	}
+		else if(!regularExpression.test(newPassword))
+		 {
+			document.getElementById('passwordMessage').style.color = "red";
+			document.getElementById('passwordMessage').innerHTML = "Password must contain at least one number and one special character";
+    	}
+		else
+		{
+			document.getElementById('passwordMessage').style.color = "green";
+			document.getElementById('passwordMessage').innerHTML = "Valid Password";
+		}
+
+	}
+
+</script>
+			<script>
+	function repasswordValidate()
+	{
+		var newPassword  = document.getElementById("id_password").value;
+		var newPasswordRe  = document.getElementById("id_passwordRe").value;
+
+		if(newPassword != newPasswordRe)
+		{
+			document.getElementById('repasswordMessage').style.color = "red";
+			document.getElementById('repasswordMessage').innerHTML = "Password does not match";
+		}
+		else
+		{
+			document.getElementById('repasswordMessage').style.color = "green";
+			document.getElementById('repasswordMessage').innerHTML = "Passwords match";
+		}
+
+	}
+</script>
+
+			<script>
+	function checkTermsandConditions()
+	{
+		var checkbox = document.getElementById("id_checkbox");
+		if(checkbox.checked)
+		{
+			document.getElementById('checkboxMessage').style.color = "green";
+			document.getElementById('checkboxMessage').innerHTML = "You agree to all terms and conditions";
+		}
+		else
+		{
+			document.getElementById('checkboxMessage').style.color = "red";
+			document.getElementById('checkboxMessage').innerHTML = "You must agree to all terms and conditions";
+		}
+	}
+</script>
+
+		</html>

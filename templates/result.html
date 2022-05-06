@@ -1,0 +1,307 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>JobMap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+    <link rel="icon" href="{% static 'Images/suitcase.png'%}">
+</head>
+
+<body>
+    <div id="home" class="space"></div>
+    <nav>
+        <a href="index.html">
+            <span class="logo"><img src="{% static 'Images/suitcase.png'%}">JobMap</span></a>
+        <ul>
+            <b>Results</b>
+            <li class="vl"></li>
+            <li id="user-detail">
+                <img class="user-icon" src="{% static 'Images/user.png'%}"><b>{{user.username}}</b></li>
+            <li class="vl"></li>
+            <li><a href="index.html">Logout
+                        <img class="login-icon" src="{% static 'Images/login.png'%}"></a></li>
+        </ul>
+    </nav>
+
+
+
+    
+
+        <div class="space"></div>
+    <div class="board centered">
+
+    <h2 class="centered" style="margin-bottom: 5px;">Suggested Job Domains</h2>
+    <h5>(hover on the graphs to see the probability for each domain)</h5>
+    <br> <br> <br>
+    <!--{% for key,value in topThreeDomainsDict.items %}
+    <li>{{key}}</li>
+    {% endfor %}-->
+
+    <div class="domainChart-1">
+        <canvas id="domainChart0"></canvas>
+    </div>
+
+    <div class="domainChart-2">
+        <canvas id="domainChart1"></canvas>
+    </div>
+
+    <div class="domainChart-3">
+        <canvas id="domainChart2"></canvas>
+    </div>
+
+    </div>
+
+    <div class="space"></div>
+    <div class="board centered">
+    <h2 class="centered" style="margin-bottom: 5px;">Trending Skills for your Job Domains</h2>
+    <h5>(hover on the graphs to see the instances of each skills)</h5>
+    <br><br><br>
+
+    <div class="domainChart-1">
+        <h3>{{domain0.0}}</h3><br><br>
+    <canvas id="myChart0" ></canvas>
+    </div>
+    <div class="domainChart-2">
+        <h3>{{domain1.0}}</h3><br><br>
+    <canvas id="myChart1"></canvas>
+    </div>
+    <div class="domainChart-3">
+        <h3>{{domain2.0}}</h3><br><br>
+    <canvas id="myChart2"></canvas>
+    </div>
+</div>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+      <script>
+
+        const configdomain0 = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    data: {{prob0|safe}},
+                    //backgroundColor: 'rgb(255, 99, 132)',
+                    backgroundColor:[
+                        'rgb(254, 80, 89)'
+                    ],
+                    label: {{domain0|safe}}
+                    }],
+                    labels: {{domain0|safe}},
+            },
+            options: {
+                indexAxis: 'x',
+
+            }
+
+        };
+          </script>
+
+<script>
+
+    const configdomain1 = {
+        type: 'bar',
+        data: {
+            datasets: [{
+                data: {{prob1|safe}},
+                //backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor:[
+                    'rgb(70, 93, 255)'
+                ],
+                label: {{domain1|safe}}
+                }],
+                labels: {{domain1|safe}},
+        },
+        options: {
+            indexAxis: 'x',
+        }
+    };
+      </script>
+
+<script>
+
+    const configdomain2 = {
+        type: 'bar',
+        data: {
+            datasets: [{
+                data: {{prob2|safe}},
+                //backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor:[
+                    'rgb(39, 222, 192)'
+                ],
+                label: {{domain2|safe}}
+                }],
+                labels: {{domain2|safe}},
+        },
+        options: {
+            indexAxis: 'x',
+        }
+    };
+      </script>
+
+<script>
+    const domainChart0 = new Chart(
+    document.getElementById('domainChart0'),
+    configdomain0
+    );
+</script>
+<script>
+    const domainChart1 = new Chart(
+    document.getElementById('domainChart1'),
+    configdomain1
+    );
+</script>
+<script>
+    const domainChart2 = new Chart(
+    document.getElementById('domainChart2'),
+    configdomain2,
+    );
+</script>
+
+
+
+      <script>
+
+    const config0 = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: {{dataset0|safe}},
+                //backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor:[
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)',
+                    'rgb(51, 255, 153)',
+                    'rgb(255, 204, 255)',
+                    'rgb(233, 23, 16)'
+                ],
+                label: '{{domain0}}'
+                }],
+                labels: {{label0|safe}},
+        },
+        options: {}
+    };
+      </script>
+
+<script>
+
+    const config1 = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: {{dataset1|safe}},
+                backgroundColor:[
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)',
+                    'rgb(51, 255, 153)',
+                    'rgb(255, 204, 255)',
+                    'rgb(233, 23, 16)'
+                ],
+                label: '{{domain1}}'
+                }],
+                labels: {{label1|safe}},
+        },
+        options: {}
+    };
+      </script>
+
+<script>
+
+    const config2 = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: {{dataset2|safe}},
+                backgroundColor:[
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)',
+                    'rgb(51, 255, 153)',
+                    'rgb(255, 204, 255)',
+                    'rgb(233, 23, 16)'
+                ],
+                label: '{{domain2}}'
+                }],
+                labels: {{label2|safe}},
+        },
+        options: {}
+    };
+      </script>
+
+
+    <script>
+        const myChart0 = new Chart(
+        document.getElementById('myChart0'),
+        config0
+        );
+    </script>
+    <script>
+        const myChart1 = new Chart(
+        document.getElementById('myChart1'),
+        config1
+        );
+    </script>
+    <script>
+        const myChart2 = new Chart(
+        document.getElementById('myChart2'),
+        config2
+        );
+    </script>
+
+    <div class="space"></div>
+
+    <div class="board centered" style="padding-top: 30px; padding-bottom: 40px;">
+        <div class="apti-tech">
+             <img src="{% static 'Images/aptitude.jpg'%}" style="width:40%">
+        <h2 class="centered">Aptitude Result</h2>
+        {% if allResults.apti %}
+        <h3>
+        <b>Score= {{allResults.apti.score}}</b>
+        {% endif %}
+
+        Correct={{allResults.apti.correct}}
+
+
+        Wrong={{allResults.apti.wrong}}</h3></div>
+
+    <div class="apti-tech">
+        <img src="{% static 'Images/tech.jpg'%}" style="width:40%">
+    <h2 class="centered">Technical Result</h2>
+        <h3>
+        <b>Score= {{allResults.tech.score}}</b>
+
+        Correct={{allResults.tech.correct}}
+
+
+        Wrong={{allResults.tech.wrong}} </h3></div>
+    </div>   
+
+
+        <!--h3>
+             {% for key,value in allResults.apti.tech_tags.items %}
+            <li>{{key}}={{value}}</li>
+            {% endfor %}
+        </h3-->
+
+    <div class="space"></div>
+    
+
+</body>
+
+</html>

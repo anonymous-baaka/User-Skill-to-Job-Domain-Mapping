@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JobMap</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %} ">
+	<link rel="icon" href="{% static 'Images/suitcase.png' %}">
+</head>
+<body>
+	<div id="home" class="space"></div>
+	<nav>
+		<a href="{% static 'index.html' %}">
+		<span class="logo"><img src="{% static 'Images/suitcase.png' %}">JobMap</span></a>
+
+		<ul>
+			<li><a href="#home">Home</a></li>
+			<li><a href="#about">About</a></li>
+			<li><a href="#credits">Credits</a></li>
+			<li><a href="#roadmap">Roadmaps</a></li>
+			<li class="vl"></li>
+			
+			
+			
+			{% if user.is_authenticated %}
+			<li><img class="login-icon" src="{% static 'Images/user.png' %}"></a></li>	
+			<b> {{user.username}}</b></li>
+			<li class="vl"></li>
+			<li><a href="logout.html">Logout <img class="login-icon" src="{% static 'Images/login.png'%} "></a></li>
+			{% else %}
+			<li><a href="login.html">Login<img class="login-icon" src="{% static 'Images/login.png' %}"></a></li>
+			{% endif %}
+		</ul>
+	</nav>
+
+	<div class="space"></div>
+
+	<div class="part">
+	<div class="write-up">
+
+		<h1>Mapping User Skills To Predict Job Domains.</h1>
+		<p>Choosing a specific job domain to make a perfect career is a very challenging task for all IT Graduates these days due to the availability of innumerous job domains and new emerging technologies.<br><br>
+		Our website helps you to go through different assesments to analyze the results and predict the best suitable job in the IT field by providing a free report on all the skills and data collected through these assesments.
+		</p>
+
+		<a href="dashboard.html"><div class="blue button">Dashboard</div></a>
+		
+	</div>
+	<div class="cover-image">
+		<img src="{% static 'Images/home.jpg' %}">
+	</div>
+	</div>
+
+	<div id="about" class="space"></div>
+	<div class="part">
+	<div class="about cover-image">
+		<img src="{% static 'Images/about.jpg' %}">
+	</div>
+
+	<div class="about write-up">
+		<h1>About us</h1>
+		<p>Jobmap is a website made with a clear motto of helping all the engineering graduates to choose a suitable job domain in the IT field with the help of various assesments and powerful prediction algorithm and provides a proper report specifying the results of the analysis.<br><br>
+		The assesments involved include testing of both technical and soft skills to understand the strong and weak subjects of the user and accordingly these pointers are used to predict the results.<br><br>
+		You can avail this free service byt just signing up by filling a few details followed by attempting the various assesments involved in the process.
+		</p>
+
+		<a href="signup.html"><div class="yellow button">Create Account</div></a>
+	</div>
+	</div>
+
+	<div id="credits" class="space"></div>
+	<div class="part">
+
+	<div class="credit write-up">
+		<h1>Credits</h1>
+
+		<h4>Atharva Dhanwate</h4>
+		<h5>(Back-end Developer)</h5><br>
+		<p>Skilled in various Programming Languages and efficient in Problem Solving and Back-end Development.</p>
+		<br>
+		<h4>Hariharan R Iyer</h4>
+		<h5>(Front-end Developer)</h5><br>
+		<p>Well versed in UI/UX Designing, Graphic Designing and Front-end Development.</p>
+		<br>
+		<h4>Kunal Chaudhary</h4>
+		<h5>(Full Stack Developer)</h5><br>
+		<p>Proficient in Full Stack Development and Software Development.</p>
+
+		<a href="https://github.com/IyerHari9999/Udhyog-Poorvakathan" target="_blank"><div class="red button">View Project</div></a>
+	</div>
+
+	<div class="credit cover-image">
+		<img src="{% static 'Images/credit.jpg' %}">
+	</div>	
+	</div>
+
+	<div id="roadmap" class="space"></div>
+
+	<div class="part">
+		<div class="about cover-image">
+		<img src="{% static 'Images/roadmap.jpg' %}">
+	</div>
+
+	<div class="about write-up">
+		<h1>Roadmaps</h1>
+		<h4>Coming Soon!!!</h4>
+		<br><br>
+		<p>Roadmaps is a feature which will help students to get a proper understanding with respect to various job domains and all the technologies invloved in that particular field.
+		<a href="#home"><div class="blue button">Go to home</div></a>
+		
+	</div>
+</div>
+
+	<div class="space"></div>
+
+	<div class="part" style="padding-bottom: 20px; text-align: center;">
+		<p style="text-align: center;">Don Bosco Institute of Technology, Mumbai. No Copyrights Reserved.</p></div>
+	<div class="space"></div>
+
+
+</body>
+</html>

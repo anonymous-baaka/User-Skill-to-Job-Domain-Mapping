@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JobMap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+    <link rel="icon" href="{% static 'Images/suitcase.png'%}">
+</head>
+
+
+
+<body>
+    <div id="home" class="space"></div>
+    <nav>
+        <a href="index.html">
+            <span class="logo"><img src="{% static 'Images/suitcase.png'%}">JobMap</span></a>
+        <ul>
+            <b>Dashboard</b>
+            <li class="vl"></li>
+            <li id="user-detail">
+                <img class="user-icon" src="{% static 'Images/user.png'%}"><b>{{user.username}}</b></li>
+            <li class="vl"></li>
+            <li><a href="index.html">Logout
+						<img class="login-icon" src="{% static 'Images/login.png'%}"></a></li>
+        </ul>
+    </nav>
+
+    {% for message in messages %}
+    
+    <div class="alert alert-success" style="text-align: center;">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+        <br>
+           <h3 style="color:red;">{{ message }}</h3>
+    </div>
+
+    {% endfor %}
+
+    <div class="space"></div>
+
+    <!--put an alert message
+	{% for message in messages %}
+	<h3>{{message}}</h3>
+	{% endfor %}
+	<!-- put an alert message-->
+    <!---Resume--->
+    <div class="board">
+        <div class="quiz-image">
+            <img src="{% static 'Images/resume.jpg'%}">
+        </div>
+        <div class="board-1">
+            <h2>Resume</h2>
+            <p>Upload your latest resume to let us understand your skill sets and predict a suitable job domain.</p><br>
+
+            <form method="POST" action="dashboard.html" enctype="multipart/form-data">
+                {% csrf_token %} {{form.pdf}}
+                <br>
+                <button onclick="alertFunction()" type="submit" class="blue button">Upload Resume</button>
+            </form>
+
+        </div>
+        <div class="board-2">
+            <h2>Status</h2>
+            <span id="resume-status-incomplete" class="incomplete status">
+					<img src="{% static 'Images/check-grey.png'%}">Incomplete</span><br><br>
+            <span id="resume-status-complete" class="complete status">
+					<img src="{% static 'Images/check-green.png'%}">Completed</span>
+        </div>
+
+        <div class="board-3">
+            <h2>Instructions</h2>
+            <ol>
+            <li class="inst">Click on choose file.</li>
+            <li class="inst">Select your resume.</li>
+            <li class="inst">Click on upload resume.</li>
+        </ol>
+        </div>
+
+
+    </div>
+    <div class="space"></div>
+
+    <!---Aptitude--->
+    <div class="board">
+        <div class="quiz-image">
+            <img src="{% static 'Images/aptitude.jpg'%}">
+        </div>
+        <div class="board-1">
+            <h2>Aptitude Test</h2>
+            <p>Aptitude tests are the most commonly used assesment techniques by job recruiters to test the basic intelligence of a student. Take this assesment to get an idea of how aptitude tests work and get a proper score card after the complete job
+                analysis.
+            </p>
+            <a href="apti.html">
+                <button class="red button">Start Test</button></a>
+        </div>
+        <div class="board-2">
+            <h2>Status</h2>
+            <span id="apti-status-incomplete" class="incomplete status">
+					<img src="{% static 'Images/check-grey.png'%}">Incomplete</span><br><br>
+            <span id="apti-status-complete" class="complete status">
+					<img src="{% static 'Images/check-green.png'%}">Completed</span>
+        </div>
+        <div class="board-3">
+            <h2>Instructions</h2>
+            <ol>
+            <li class="inst">Click start test button.</li>
+            <li class="inst">Read the details carefully.</li>
+            <li class="inst">Attempt the test.</li>
+            <li class="inst">Click on finish test.</li>
+        </ol>
+        </div>
+    </div>
+    <div class="space"></div>
+
+    <!---SoftSkills--->
+    <div class="board">
+        <div class="quiz-image">
+            <img src="{% static 'Images/skill.jpg'%}">
+        </div>
+        <div class="board-1">
+            <h2>Soft Skills</h2>
+            <p>When it comes to working in a job environment, soft skills are as important as other technical skills. Take this self assesment test to let us figure out how good your are at different soft skills.</p>
+            <a href="soft.html">
+                <button class="green button">Start Test</button>
+            </a>
+        </div>
+        <div class="board-2">
+            <h2>Status</h2>
+            <span id="soft-status-incomplete" class="incomplete status">
+                <img src="{% static 'Images/check-grey.png'%}">Incomplete</span><br><br>
+            <span id="soft-status-complete" class="complete status">
+					<img src="{% static 'Images/check-green.png'%}">Completed</span>
+        </div>
+        <div class="board-3">
+            <h2>Instructions</h2>
+            <ol>
+            <li class="inst">Click start test button.</li>
+            <li class="inst">Read the details carefully.</li>
+            <li class="inst">Attempt the test.</li>
+            <li class="inst">Click on finish test.</li>
+        </ol>
+        </div>
+    </div>
+    <div class="space"></div>
+
+    <!---Technical--->
+    <div class="board">
+        <div class="quiz-image">
+            <img src="{% static 'Images/tech.jpg'%}">
+        </div>
+        <div class="board-1">
+            <h2>Technical Test</h2>
+            <p> Subjects like Data structures, Object oriented programming, Database management, etc. form the basics of every job domain in IT field. Take this quiz to let us analyze which technologies you are best at.</p>
+            <a href="tech.html">
+                <button class="yellow button">Start Test</button>
+            </a>
+        </div>
+        <div class="board-2">
+            <h2>Status</h2>
+            <span id="tech-status-incomplete" class="incomplete status">
+					<img src="{% static 'Images/check-grey.png'%}">Incomplete</span><br><br>
+            <span id="tech-status-complete" class="complete status">
+					<img src="{% static 'Images/check-green.png'%}">Completed</span>
+        </div>
+        <div class="board-3">
+            <h2>Instructions</h2>
+            <ol>
+            <li class="inst">Click start test button.</li>
+            <li class="inst">Read the details carefully.</li>
+            <li class="inst">Attempt the test.</li>
+            <li class="inst">Click on finish test.</li>
+        </ol>
+        </div>
+    </div>
+    <div class="space"></div>
+
+    <!---Results--->
+    <div class="board">
+        <div class="quiz-image">
+            <img src="{% static 'Images/result.jpg'%}">
+        </div>
+        <div class="board-1">
+            <h2>Result</h2>
+            <p>Complete all the above tests to view the results after the analysis, to get the details regarding most suitable job domains and the job opportunities and other features.</p>
+            <a href="result.html">
+              <button class="purple button">View Result</button>
+            </a>
+        </div>
+        <div class="board-2">
+            <h2>Status</h2>
+            <span id="resume-status-incomplete" class="incomplete status">
+					<img src="{% static 'Images/check-grey.png'%}">Incomplete</span><br><br>
+            <span id="resume-status-complete" class="complete status">
+					<img src="{% static 'Images/check-green.png'%}">Completed</span>
+        </div>
+        <div class="board-3">
+            <h2>Instructions</h2>
+            View the results by clicking on the view result button.
+        </div>
+    </div>
+    <div class="space"></div>
+    {% if url%}
+    <p>Uploaded file: <a href="{{url}}">{{url}}</a></p>
+    {% endif %} {% if msg != "" %}
+    <script>
+        //setTimeout(function() {
+        //    alert('Resume Uploaded Sucessfully');
+
+        //}, 0);
+        function alertFunction() {
+            alert("Resume Uploaded Sucessfully")
+        }
+    </script>
+    {% endif %}
+</body>

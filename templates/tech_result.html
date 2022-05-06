@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    <h1>Test page: Technical Result</h1>
+    <h3>
+        Score= {{result.score}}
+    </h3>
+    <br>
+    <h3>
+        Correct={{result.correct}}
+    </h3>
+    <h3>
+        Wrong={{result.wrong}}
+    </h3>
+
+    <ul>
+        <h3>
+            <br><br> {% for key,value in result.tech_tags.items %}
+            <li>{{key}}={{value}}</li>
+            {% endfor %}
+        </h3>
+    </ul>
+
+</body>
+
+</html>

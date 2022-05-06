@@ -1,0 +1,230 @@
+{% load mytags %} {% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JobMap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/style.css' %}"
+    />
+    <link rel="icon" href="{% static 'Images/suitcase.png'%}" />
+  </head>
+
+  <body onload="hideTech()">
+    {% with number_ques=0 %} {% endwith %}
+    <div id="home" class="space"></div>
+    <nav>
+      <a href="index.html">
+        <span class="logo"
+          ><img src="{% static 'Images/suitcase.png'%}" />JobMap</span></a>
+      <ul>
+        <b>Technical Test</b>
+        <li class="vl"></li>
+
+        {% if user.is_authenticated %}
+        <li id="user-detail">
+          <img class="user-icon" src="{% static 'Images/user.png'%}" /><b>{{user.username}}</b
+          >
+        </li>
+        {% else %}
+        <li id="user-detail">
+          <img class="user-icon" src="{% static 'Images/user.png'%}" /><b>Username</b>
+        </li>
+        {% endif %}
+        <li class="vl"></li>
+        <li>
+          <a href="dashboard.html">Back <img class="login-icon" src="{% static 'Images/login.png'%}"/></a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="space"></div>
+    <div class="part" id="tech-test-details">
+      <div class="write-up">
+        <br />
+        <h3>Test Details:</h3>
+        <br /><br />
+        <p>
+          Technical tests are a way to access the intelligence of a candidate in
+          a particular field. This will allow the user to understand the
+          strengths and weaknesses with respect to technical subjects.
+        </p>
+        <br />
+        <h4>
+          Technical test contains a total of 5 sections, each containing 5
+          questions. The details regarding the sections are as follows:
+        </h4>
+        <br /><br />
+        <h4>
+          • Section 1 - Data Strunctures and Algorithms (DSA)<br />
+          • Section 2 - Object Oriented Programming Methodology (OOPM)<br />
+          • Section 3 - Web Development and Tecnology<br />
+          • Section 4 - Database Management System (DBMS) <br />
+          • Section 5 - Computer Networking (CN)<br /><br />
+        </h4>
+        <h5>
+          Note: Press the finish button at the end of all the sections after
+          completing the test to submit your results.
+        </h5>
+        <div class="blue button" onclick="techTestDetails()">Start Test</div>
+      </div>
+
+      <div class="cover-image">
+        <img style="width: 65%" src="{% static 'Images/tech.jpg' %}" />
+      </div>
+    </div>
+
+    <form method="post" action="tech_result.html">
+      <div class="part" id="tech-test-1">
+        <br />
+        <h4>Section 1 - Data Strunctures and Algorithms (DSA)</h4>
+        <br />
+        {% csrf_token %} {% for q in questionList %} {% if "dsa" in q.tag %}
+        <br />
+        <h3>
+          Q. {{q.question}}<br /><br />
+          <input type="radio" name="id{{q.id}}" value="1" /> (a) {{q.option1}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="2" /> (b)
+          {{q.option2}} &emsp;&emsp;
+          <input type="radio" name="id{{q.id}}" value="3" /> (c) {{q.option3}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="4" /> (d)
+          {{q.option4}} <br /><br />
+        </h3>
+        <br />
+        {% endif %} {% endfor %}
+        <div class="blue button qb" onclick="techTest1()">Next Section</div></div>
+      </div>
+
+
+      <div class="part" id="tech-test-2">
+        <br />
+        <h4>Section 2 - Object Oriented Programming Methodology (OOPM)</h4>
+        <br />
+        {% for q in questionList %} {% if "oops" in q.tag %}
+        <br />
+        <h3>
+          Q. {{q.question}}<br /><br />
+          <input type="radio" name="id{{q.id}}" value="1" /> (a) {{q.option1}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="2" /> (b)
+          {{q.option2}} &emsp;&emsp;
+          <input type="radio" name="id{{q.id}}" value="3" /> (c) {{q.option3}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="4" /> (d)
+          {{q.option4}} <br /><br />
+        </h3>
+        <br />
+        {% endif %} {% endfor %}
+        <div class="blue button qb" onclick="techTest2()">Next Section</div></div>
+      </div>
+
+
+      <div class="part" id="tech-test-3">
+        <br />
+        <h4>Section 3 - Web Development and Tecnology</h4>
+        <br />
+        {% for q in questionList %} {% if "webd" in q.tag %}
+        <br />
+        <h3>
+          Q. {{q.question}}<br /><br />
+          <input type="radio" name="id{{q.id}}" value="1" /> (a) {{q.option1}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="2" /> (b)
+          {{q.option2}} &emsp;&emsp;
+          <input type="radio" name="id{{q.id}}" value="3" /> (c) {{q.option3}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="4" /> (d)
+          {{q.option4}} <br /><br />
+        </h3>
+        <br />
+        {% endif %} {% endfor %}
+        <div class="blue button qb" onclick="techTest3()">Next Section</div></div>
+      </div>
+
+      <div class="part" id="tech-test-4">
+        <br />
+        <h4>Section 4 - Database Management System (DBMS)</h4>
+        <br />
+        {% for q in questionList %} {% if "dbms" in q.tag %}
+        <br />
+        <h3>
+          Q. {{q.question}}<br /><br />
+          <input type="radio" name="id{{q.id}}" value="1" /> (a) {{q.option1}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="2" /> (b)
+          {{q.option2}} &emsp;&emsp;
+          <input type="radio" name="id{{q.id}}" value="3" /> (c) {{q.option3}}
+          &emsp;&emsp;
+          <input type="radio" name="id{{q.id}}" value="4" /> (d){{q.option4}}
+          <br /><br />
+        </h3>
+        <br />
+        {% endif %} {% endfor %}
+        <div class="blue button qb" onclick="techTest4()">Next Section</div></div>
+      </div>
+
+      <div class="part" id="tech-test-5">
+        <br />
+        <h4>Section 5 - Computer Networks(CN)</h4>
+        <br />
+        {% for q in questionList %} {% if "cn" in q.tag %}
+        <br />
+        <h3>
+          Q. {{q.question}}<br /><br />
+          <input type="radio" name="id{{q.id}}" value="1" /> (a) {{q.option1}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="2" /> (b)
+          {{q.option2}} &emsp;&emsp;
+          <input type="radio" name="id{{q.id}}" value="3" /> (c) {{q.option3}}
+          &emsp;&emsp; <input type="radio" name="id{{q.id}}" value="4" /> (d)
+          {{q.option4}} <br /><br />
+        </h3>
+        <br />
+        {% endif %} {% endfor %}
+        <button type="submit" class="blue button qb">Finish Test</button>
+      </div>
+
+    </form>
+    <div class="space"></div>
+  </body>
+  <script type="text/javascript">
+
+  function hideTech(){
+    document.getElementById("tech-test-1").style.display = "none";
+    document.getElementById("tech-test-2").style.display = "none";
+    document.getElementById("tech-test-3").style.display = "none";
+    document.getElementById("tech-test-4").style.display = "none";
+    document.getElementById("tech-test-5").style.display = "none";
+
+  }
+  
+  function techTestDetails() {
+    document.getElementById("tech-test-details").style.display = "none";
+    document.getElementById("tech-test-1").style.display = "block";
+}
+
+  function techTest1() {
+  document.getElementById("tech-test-1").style.display = "none";
+    document.getElementById("tech-test-2").style.display = "block";
+}
+
+function techTest2() {
+  document.getElementById("tech-test-2").style.display = "none";
+    document.getElementById("tech-test-3").style.display = "block";
+}
+
+function techTest3() {
+  document.getElementById("tech-test-3").style.display = "none";
+    document.getElementById("tech-test-4").style.display = "block";
+}
+
+function techTest4() {
+  document.getElementById("tech-test-4").style.display = "none";
+    document.getElementById("tech-test-5").style.display = "block";
+}
+
+
+</script>
+</html>

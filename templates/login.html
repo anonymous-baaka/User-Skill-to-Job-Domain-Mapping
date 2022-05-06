@@ -1,0 +1,72 @@
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JobMap</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+	<link rel="icon" href="{% static 'Images/suitcase.png">
+</head>
+<body>
+	<div id="home" class="space"></div>
+	<nav>
+		<a href="index.html">
+		<span class="logo"><img src="{% static 'Images/suitcase.png' %}">JobMap</span></a>
+
+		<ul>
+			<b>You are on the Login Page</b>
+			<li class="vl"></li>
+			<li><a href="index.html">Go to Home</a></li>
+		</ul>
+	</nav>
+
+	<div class="space"></div>
+
+	<div class="part">
+
+		<div class="about write-up">
+		<h1>Login Details</h1>
+
+		<form method="POST" action="login.html">
+		{% csrf_token %}
+			<h4>Username</h4><br>
+			<input class="textbox" type="text" name="name_Username" id="id_email"><br>
+
+			<h4>Password</h4><br>
+			<input class="textbox" type="password" name="name_password" id="id_password"><br>
+
+			<input class="checkbox" type="checkbox" name="terms"><h4 style="font-weight: 400;">I agree to all terms and conditions</h4>
+
+			<p><a href="signup.html">Create an account</a> or
+			<a href="{% provider_login_url "google" method="oauth2" %}">
+			Sign in with Google</a></p>
+			
+
+			<button type="submit" class="green button">Login</button>
+		</form>
+
+		</div>
+		<div class="cover-image">
+		<img src="{% static 'Images/login.jpg' %}">
+	</div>
+	</div>
+	<div class="space"></div>
+
+</body>
+
+<!--put an alert message put alert-->
+{% for message in messages %}
+<script>
+	setTimeout(function() {
+            alert('Invalid Credentials. Try again');
+
+        }, 0);
+</script>
+{% endfor %}
+
+</html>
