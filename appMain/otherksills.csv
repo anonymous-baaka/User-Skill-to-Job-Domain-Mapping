@@ -1,0 +1,20 @@
+,,,,,,,,,
+,quant,verbal,logical,communication,DSA,OOPM,Web,DBMS,CN
+Data Analytics,1,1,1,1,1,0,1,1,0
+animation,1,0,1,1,0,1,1,0,0
+backend,0,1,1,1,1,1,1,1,1
+cisco,1,0,1,1,0,1,1,1,1
+data scientist,1,1,1,1,1,0,1,0,0
+database,0,1,1,1,1,0,1,1,0
+dot-net,0,0,1,1,0,1,1,1,1
+java dev,1,0,1,1,1,1,1,1,1
+network engineer,1,0,1,1,0,0,1,1,1
+python dev,0,0,1,1,1,1,1,1,0
+sql engineer,1,0,1,1,0,0,1,1,1
+system admin,0,0,1,1,0,0,1,0,1
+tester,0,0,1,1,0,0,1,1,1
+ui/ux dev,0,0,1,1,0,0,1,0,0
+web dev,1,1,1,1,0,1,1,1,0
+,,,,,,,,,
+,,,,1=required,,,,,
+,,,,0=not required,,,,,
